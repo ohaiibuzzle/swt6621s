@@ -19,7 +19,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends debhelper fakeroot lintian
+          sudo apt-get install -y --no-install-recommends debhelper build-essential fakeroot lintian
 
       - name: Build package
         run: |

@@ -20,7 +20,9 @@ ccflags-y +=-I$(CURRENT_DIR)/sdio
 #obj-$(CONFIG_SEEKWAVE_BSP_DRIVERS)  += skwutil/
 #endif
 
-ifeq ($(filter y,$(CONFIG_ANDROID_BINDER_IPC) $(CONFIG_SKW_ANDROID)),)
+ifneq ($(filter y m,$(CONFIG_SKW_BT)),)
+        ccflags-y += -DCONFIG_BT_SEEKWAVE
+else ifeq ($(filter y,$(CONFIG_ANDROID_BINDER_IPC) $(CONFIG_SKW_ANDROID)),)
         ccflags-y += -DCONFIG_BT_SEEKWAVE
 endif
 

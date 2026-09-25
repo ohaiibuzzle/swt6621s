@@ -33,3 +33,7 @@ override_dh_auto_install:
 	              debian/$(PKG)/lib/firmware/SWT6621S_NV_USB.bin
 	install -m644 $(FWDIR)/USB-Firmware/$(RFDIR)/SWT6621S_SEEKWAVE_R04001.bin \
 	              debian/$(PKG)/lib/firmware/
+	install -m644 drivers/swtbt4l/sv6160.nvbin \
+	              drivers/swtbt4l/sv6160lite.nvbin \
+	              drivers/swtbt4l/sv6316.nvbin \
+	              debian/$(PKG)/lib/firmware/

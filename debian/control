@@ -13,11 +13,11 @@ Package: swt6621s-dkms
 Architecture: all
 Depends: dkms, make, gcc, bc, perl, ${misc:Depends}
 Recommends: linux-headers-generic | linux-headers
-Description: SeekWave SWT6621S (SV6160LITE) wifi driver (DKMS)
+Description: SeekWave SWT6621S (SV6160LITE) wifi/bluetooth driver (DKMS)
  DKMS source for the SeekWave SWT6621S wifi/BT combo chip (reported as
  SV6160LITE/SV6160; SV6316 also supported), over USB (0x3607:0x6621) and
  SDIO (0x1FFE:0x6621).
  .
- This package ships the driver sources under /usr/src plus the USB and SDIO
- firmware blobs in /lib/firmware. DKMS rebuilds the modules automatically
+ This package ships the wifi and bluetooth driver sources under /usr/src plus
+ the USB and SDIO firmware blobs and bluetooth NV files in /lib/firmware. DKMS rebuilds the modules automatically
  for every installed kernel.
