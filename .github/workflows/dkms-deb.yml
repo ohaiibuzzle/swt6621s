@@ -1,0 +1,54 @@
+name: dkms-deb
+
+on:
+  push:
+    branches: [dkms, main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends debhelper fakeroot lintian
+
+      - name: Build package
+        run: |
+          dpkg-buildpackage -us -uc -b
+          mkdir -p dist
+          mv ../*.deb ../*.buildinfo ../*.changes dist/ 2>/dev/null || mv ../*.deb dist/
+
+      - name: Lint (non-fatal)
+        continue-on-error: true
+        run: lintian dist/*.deb
+
+      - name: Upload .deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: swt6621s-dkms-deb
+          path: dist/*.deb
+          if-no-files-found: error
+
+  release:
+    needs: build-deb
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: swt6621s-dkms-deb
+          path: dist
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.deb

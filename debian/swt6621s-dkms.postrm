@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+NAME=swt6621s
+VERSION=25.34.7.1
+
+if [ "$1" = purge ] && command -v dkms >/dev/null 2>&1; then
+    dkms remove -m "$NAME" -v "$VERSION" --all >/dev/null 2>&1 || true
+fi
+
+#DEBHELPER#
+
+exit 0

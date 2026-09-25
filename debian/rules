@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+DKMSVER := 25.34.7.1
+PKG     := swt6621s-dkms
+SRCDIR  := debian/$(PKG)/usr/src/swt6621s-$(DKMSVER)
+FWDIR   := firmware
+NVDIR   := NVBIN/NV_Related_to_customer_HW
+RFDIR   := RFBIN/RF_Related_to_customer_HW
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+override_dh_auto_build:
+override_dh_auto_test:
+override_dh_auto_clean:
+
+override_dh_auto_install:
+	install -d $(SRCDIR)
+	cp -a Makefile dkms.conf drivers include $(SRCDIR)/
+	install -d debian/$(PKG)/lib/firmware
+	install -m644 $(FWDIR)/SDIO-Firmware/SWT6621S_IRAM_SDIO.bin \
+	              $(FWDIR)/SDIO-Firmware/SWT6621S_DRAM_SDIO.bin \
+	              debian/$(PKG)/lib/firmware/
+	install -m644 $(FWDIR)/SDIO-Firmware/$(NVDIR)/SWT6621S_NV_SDIO_SHARE.bin \
+	              debian/$(PKG)/lib/firmware/SWT6621S_NV_SDIO.bin
+	install -m644 $(FWDIR)/SDIO-Firmware/$(RFDIR)/SWT6621S_SEEKWAVE_R00001.bin \
+	              debian/$(PKG)/lib/firmware/
+	install -m644 $(FWDIR)/USB-Firmware/SWT6621S_IRAM_USB.bin \
+	              $(FWDIR)/USB-Firmware/SWT6621S_DRAM_USB.bin \
+	              debian/$(PKG)/lib/firmware/
+	install -m644 $(FWDIR)/USB-Firmware/$(NVDIR)/SWT6621S_NV_USB_SHARE.bin \
+	              debian/$(PKG)/lib/firmware/SWT6621S_NV_USB.bin
+	install -m644 $(FWDIR)/USB-Firmware/$(RFDIR)/SWT6621S_SEEKWAVE_R04001.bin \
+	              debian/$(PKG)/lib/firmware/

@@ -1,0 +1,24 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: swt6621s
+Source: https://github.com/WLTB-Gino/swt6621s
+
+Files: *
+Copyright: 2020-2021 Seekwave Tech Inc.
+License: GPL-2.0
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2 of the License.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU General Public License for more details.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+Files: firmware/*
+Copyright: Seekwave Tech Inc.
+License: proprietary-firmware
+ Vendor-supplied binary firmware blobs. Redistributed as part of the vendor
+ SDK; no source is provided.

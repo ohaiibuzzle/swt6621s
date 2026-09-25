@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+NAME=swt6621s
+VERSION=25.34.7.1
+
+if [ "$1" = configure ] && command -v dkms >/dev/null 2>&1; then
+    # Failures are not fatal: headers for the running kernel may be missing.
+    dkms add -m "$NAME" -v "$VERSION" >/dev/null 2>&1 || true
+    dkms build -m "$NAME" -v "$VERSION" >/dev/null 2>&1 || true
+    dkms install -m "$NAME" -v "$VERSION" >/dev/null 2>&1 || true
+fi
+
+#DEBHELPER#
+
+exit 0
